@@ -1,0 +1,20 @@
+# «Волна»: локальное, не коммитится
+.env
+.env.local
+.volna/state.json
+.volna/journal/
+.volna/feedback.md
+.volna/project.local.md
+
+# Python и данные службы
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+data/
+
+# Локальная выкладка и адреса своей сети (LOCAL.md)
+LOCAL.md
+deploy/
+.mcp.json

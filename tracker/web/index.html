@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Трекер задач</title>
+  <link rel="stylesheet" href="/static/board.css">
+  <script src="/static/board.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <h1>Трекер задач</h1>
+    <div class="filters">
+      <label>Проект <select id="project-filter"></select></label>
+      <label>Метка <select id="tag-filter"></select></label>
+    </div>
+    <span id="status-line" class="quiet"></span>
+  </header>
+
+  <p id="error" class="error" hidden></p>
+  <p id="hint" class="quiet" hidden>Задач пока нет: «+» в колонке создаёт первую, проект задаётся в её окне.</p>
+  <main id="board" class="board"></main>
+
+  <dialog id="card-dialog" tabindex="-1">
+    <form id="card-form" class="card-form">
+      <div class="card-head">
+        <strong id="card-id"></strong>
+        <button type="button" class="close" data-close aria-label="Закрыть">&times;</button>
+      </div>
+      <label>Заголовок
+        <span class="title-row">
+          <input name="title" required autocomplete="off">
+          <button type="button" id="copy-link" title="Скопировать полный адрес страницы задачи">Ссылка</button>
+        </span>
+      </label>
+      <div class="row">
+        <label>Id <input name="id" class="id-input" autocomplete="off" spellcheck="false"
+                         placeholder="выдаётся сам" pattern="[A-Za-z0-9][A-Za-z0-9_\-]{0,63}"
+                         title="Латинские буквы, цифры, дефис и подчёркивание; при смене прежняя ссылка перестаёт работать"></label>
+        <label>Проект
+          <span class="project-row">
+            <select name="project" required></select>
+            <input name="new_project" hidden autocomplete="off" spellcheck="false"
+                   placeholder="имя нового проекта" aria-label="Имя нового проекта">
+          </span>
+        </label>
+        <label>Статус <select name="status"></select></label>
+        <label class="grow">Метки <input name="tags" placeholder="через запятую" autocomplete="off"></label>
+      </div>
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" data-tab="view">Просмотр</button>
+        <button type="button" role="tab" data-tab="edit">Правка</button>
+      </div>
+      <div id="tab-view" class="article" role="tabpanel"></div>
+      <div id="tab-edit" role="tabpanel">
+        <textarea name="body" rows="16" spellcheck="false" aria-label="Текст задачи, markdown"></textarea>
+      </div>
+      <p id="card-meta" class="quiet"></p>
+      <p id="card-error" class="error" hidden></p>
+      <div class="buttons">
+        <button type="submit" class="main">Сохранить</button>
+        <button type="button" data-close>Отмена</button>
+      </div>
+    </form>
+    <form id="comment-form" class="comment-form">
+      <label>Комментарий <textarea name="text" rows="3"></textarea></label>
+      <div class="buttons"><button type="submit">Добавить комментарий</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

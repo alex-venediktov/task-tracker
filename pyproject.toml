@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "task-tracker"
+version = "0.1.0"
+description = "Трекер задач: md-хранилище по проектам, REST и MCP-сервер"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "mcp>=2.2,<3",
+    "pyyaml>=6.0",
+    "markdown-it-py>=3.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.28", "ruff>=0.6"]
+
+[project.scripts]
+tracker = "tracker.app:run"
+
+[tool.setuptools.packages.find]
+include = ["tracker*"]
+
+[tool.setuptools.package-data]
+tracker = ["web/*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
